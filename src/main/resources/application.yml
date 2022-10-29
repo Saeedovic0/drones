@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: ${APPLICATION_NAME:drones}
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/drones}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:mysecretpassword}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
