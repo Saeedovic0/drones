@@ -5,6 +5,10 @@ public final class StringUtils {
     }
 
     public static String toPercentage(float percent) {
-        return ((int) (percent * 100)) + "%";
+        return Math.round(percent) + "%";
+    }
+
+    public static String toGrams(float weight) {
+        return Math.round(weight * 100.0) / 100.0 + "gm";
     }
 }

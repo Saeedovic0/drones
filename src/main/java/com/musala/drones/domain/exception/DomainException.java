@@ -1,11 +1,15 @@
 package com.musala.drones.domain.exception;
 
-public class DomainException extends RuntimeException {
-    public DomainException(final String message) {
+import jakarta.validation.constraints.NotBlank;
+
+public abstract class DomainException extends RuntimeException {
+    protected DomainException(final String message) {
         super(message);
     }
 
-    public DomainException(final String message, final Throwable throwable) {
+    protected DomainException(final String message, final Throwable throwable) {
         super(message, throwable);
     }
+
+    public abstract @NotBlank String getDescription();
 }

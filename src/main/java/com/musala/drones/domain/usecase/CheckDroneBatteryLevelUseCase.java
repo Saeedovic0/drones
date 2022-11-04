@@ -13,7 +13,7 @@ public class CheckDroneBatteryLevelUseCase {
 
     public DroneBatteryLevelViewModel check(String serialNumber) {
         var drone = droneRepo.findBySerialNumber(serialNumber);
-        if (drone == null) throw new DroneNotFoundException();
+        if (drone == null) throw new DroneNotFoundException(serialNumber);
         return DroneBatteryLevelViewModel.from(drone);
     }
 }

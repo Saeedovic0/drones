@@ -19,7 +19,7 @@ public class CheckDroneLoadedMedicationsUseCase {
 
     public List<MedicationViewModel> check(String droneSerialNumber) {
         var drone = droneRepo.findBySerialNumber(droneSerialNumber);
-        if (drone == null) throw new DroneNotFoundException();
+        if (drone == null) throw new DroneNotFoundException(droneSerialNumber);
 
         return medicationRepo.findAllByCodeIn(drone.getMedicationCodes())
                 .stream().map(MedicationViewModel::from).toList();

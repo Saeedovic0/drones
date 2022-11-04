@@ -29,15 +29,16 @@ public class LoadDroneWithMedicationsUseCase {
 
         medicationRepo.addMissing(medications);
 
-        if (drone == null) throw new DroneNotFoundException();
-        if (drone.getState() != Drone.State.IDLE) throw new DroneNotAvailableException();
-        if (drone.getBatteryCapacity() < 0.25) throw new DroneBatteryLowException();
+        if (drone == null) throw new DroneNotFoundException(droneSerialNumber);
+        if (drone.getState() != Drone.State.IDLE) throw new DroneNotAvailableException(drone.getState());
+        if (drone.getBatteryCapacity() < 0.25) throw new DroneBatteryLowException(drone.getBatteryCapacity());
 
         drone.setState(Drone.State.LOADING);
         droneRepo.save(drone);
 
-        if (medications.stream().mapToDouble(Medication::getWeight).sum() > drone.getWeightLimit())
-            throw new DroneOverloadException();
+        var loadWeight = medications.stream().mapToDouble(Medication::getWeight).sum();
+        if (loadWeight > drone.getWeightLimit())
+            throw new DroneOverloadException(drone.getWeightLimit(), (float) loadWeight);
 
         drone.getMedicationCodes().addAll(medications.stream().map(Medication::getCode).toList());
         drone.setState(Drone.State.LOADED);
