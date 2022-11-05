@@ -10,16 +10,20 @@ import com.musala.drones.domain.usecase.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @CrossOrigin
 @RestController
 @RequestMapping("/drones")
 public class DronesController {
+    @Getter
     @Autowired
     private RegisterDroneUseCase registerDroneUseCase;
     @Autowired
