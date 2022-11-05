@@ -2,16 +2,22 @@ package com.musala.drones.infra.jpa.repo;
 
 import com.musala.drones.domain.model.Drone;
 import com.musala.drones.domain.repo.DroneRepo;
+import com.musala.drones.infra.jpa.entity.DroneAuditEntity;
 import com.musala.drones.infra.jpa.entity.DroneEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class DroneRepoImpl implements DroneRepo {
     @Autowired
     private DroneEntityRepo droneEntityRepo;
+
+    @Autowired
+    private DroneAuditEntityRepo droneAuditEntityRepo;
 
     @Override
     public Drone save(Drone drone) {
@@ -29,5 +35,15 @@ public class DroneRepoImpl implements DroneRepo {
         return droneEntityRepo.findByStateAndWeightLimitGreaterThanEqualAndBatteryCapacityGreaterThanEqual(
                         Drone.State.IDLE, totalLoadWeight, 0.25f, PageRequest.of(page, limit))
                 .map(DroneEntity::toDrone);
+    }
+
+    @Override
+    public Page<Drone> findAll(int page, int limit) {
+        return droneEntityRepo.findAll(PageRequest.of(page, limit)).map(DroneEntity::toDrone);
+    }
+
+    @Override
+    public void createHistory(List<Drone> drones) {
+        droneAuditEntityRepo.saveAll(drones.stream().map(DroneAuditEntity::new).toList());
     }
 }
