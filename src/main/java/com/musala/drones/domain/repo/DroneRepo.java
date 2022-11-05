@@ -8,5 +8,5 @@ public interface DroneRepo {
 
     Drone findBySerialNumber(String serialNumber);
 
-    Page<Drone> findAllAvailable(float totalLoadWeight);
+    Page<Drone> findAllAvailable(float totalLoadWeight, int page, int limit);
 }

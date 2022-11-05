@@ -1,9 +1,9 @@
 package com.musala.drones.infra.jpa.repo;
 
-import com.musala.drones.infra.jpa.entity.DroneEntity;
+import com.musala.drones.infra.jpa.entity.MedicationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MedicationEntityRepo extends JpaRepository<String, DroneEntity> {
+interface MedicationEntityRepo extends JpaRepository<MedicationEntity, String> {
 }

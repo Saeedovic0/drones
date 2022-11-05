@@ -1,11 +1,12 @@
 package com.musala.drones.infra.jpa.entity;
 
 import com.musala.drones.domain.model.Drone;
-import com.vladmihalcea.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -30,9 +31,9 @@ public class DroneEntity {
     @Column(name = "state", nullable = false)
     private Drone.State state;
 
-    @Type(JsonType.class)
     @Column(name = "medication_codes")
-    private List<String> medicationCodes;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<String> medicationCodes = new ArrayList<>();
 
 
     public DroneEntity(Drone drone) {
@@ -42,5 +43,9 @@ public class DroneEntity {
         batteryCapacity = drone.getBatteryCapacity();
         state = drone.getState();
         medicationCodes = drone.getMedicationCodes();
+    }
+
+    public Drone toDrone() {
+        return new Drone(serialNumber, model, weightLimit, batteryCapacity, state, medicationCodes);
     }
 }

@@ -1,5 +1,7 @@
 package com.musala.drones.domain.exception;
 
+import com.musala.drones.common.util.StringUtils;
+
 public class DroneOverloadException extends DomainException {
     private static final String MESSAGE = "DroneOverload";
 
@@ -24,8 +26,8 @@ public class DroneOverloadException extends DomainException {
     @Override
     public String getDescription() {
         return String.format("Drone weight limit exceeded, limit: %s, provided: %s",
-                weightLimit == null ? "N/A" : weightLimit,
-                weightProvided == null ? "N/A" : weightProvided
+                weightLimit == null ? "N/A" : StringUtils.toGrams(weightLimit),
+                weightProvided == null ? "N/A" : StringUtils.toGrams(weightProvided)
         );
     }
 }

@@ -7,9 +7,9 @@ import jakarta.validation.constraints.Positive;
 import org.hibernate.validator.constraints.URL;
 
 public record AddMedicationCommand(
-        @JsonProperty(required = true) @Pattern(regexp = "^[A-Za-z\\d-_]$") String name,
+        @JsonProperty(required = true) @Pattern(regexp = "^[A-Za-z\\d-_]+$") String name,
         @JsonProperty(required = true) @Positive float weight,
-        @JsonProperty(required = true) @Pattern(regexp = "^[A-Z\\d_]$") String code,
+        @JsonProperty(required = true) @Pattern(regexp = "^[A-Z\\d_]+$") String code,
         @JsonProperty(required = true) @URL String imageUrl) {
 
     public Medication toMedication() {

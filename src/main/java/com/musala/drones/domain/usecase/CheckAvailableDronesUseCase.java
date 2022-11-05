@@ -14,10 +14,11 @@ public class CheckAvailableDronesUseCase {
     @Autowired
     private DroneRepo droneRepo;
 
-    public PageResponse<DroneViewModel> check(List<Medication> medications) {
+    public PageResponse<DroneViewModel> check(List<Medication> medications, int page, int limit) {
         return new PageResponse<>(
-                droneRepo.findAllAvailable((float) medications.stream().mapToDouble(Medication::getWeight).sum())
-                        .map(DroneViewModel::from)
+                droneRepo.findAllAvailable(
+                        (float) medications.stream().mapToDouble(Medication::getWeight).sum(), page, limit
+                ).map(DroneViewModel::from)
         );
     }
 }

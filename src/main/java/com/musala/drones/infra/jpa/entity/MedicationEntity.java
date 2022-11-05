@@ -1,5 +1,6 @@
 package com.musala.drones.infra.jpa.entity;
 
+import com.musala.drones.domain.model.Medication;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,4 +20,15 @@ public class MedicationEntity {
     private String code;
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
+
+    public MedicationEntity(Medication medication) {
+        name = medication.getName();
+        weight = medication.getWeight();
+        code = medication.getCode();
+        imageUrl = medication.getImageUrl();
+    }
+
+    public Medication toMedication() {
+        return new Medication(name, weight, code, imageUrl);
+    }
 }

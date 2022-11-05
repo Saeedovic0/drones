@@ -3,13 +3,16 @@ package com.musala.drones.domain.model;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class Drone {
     @NotBlank
     @Size(min = 1, max = 100)
@@ -20,7 +23,7 @@ public class Drone {
     @Max(1) // %
     private final float batteryCapacity;
     private State state;
-    private final List<String> medicationCodes = List.of();
+    private List<String> medicationCodes = new ArrayList<>();
 
     public Drone(String serialNumber, Model model, float weightLimit, float batteryCapacity, State state) {
         this.serialNumber = serialNumber;
