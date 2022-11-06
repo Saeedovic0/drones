@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "fd092635-fdb7-4d02-bbf5-4dfa2c7cdedf",
+		"name": "Drones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3423176"
+	},
+	"item": [
+		{
+			"name": "Register Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"serialNumber\": \"3863794932\",\r\n    \"model\": \"MIDDLE_WEIGHT\",\r\n    \"weightLimit\": 200,\r\n    \"batteryCapacity\": 0.50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/drones",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load Medications",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"medicationItems\": [\r\n        {\r\n            \"name\": \"Goproxilin\",\r\n            \"weight\": 85,\r\n            \"code\": \"GOPROXILIN_335\",\r\n            \"imageUrl\": \"https://camerashop.com.eg/wp-content/uploads/2021/10/1631822665_IMG_1606161.jpg\"\r\n        },\r\n                {\r\n            \"name\": \"Chacolron\",\r\n            \"weight\": 53,\r\n            \"code\": \"CHACOLRON_567\",\r\n            \"imageUrl\": \"https://camerashop.com.eg/wp-content/uploads/2021/10/1631822665_IMG_1606161.jpg\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/drones/3863794932/medications",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drones",
+						"3863794932",
+						"medications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Loaded Medications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drones/3863794932/medications",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drones",
+						"3863794932",
+						"medications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Available Drones",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"medicationItems\": [\r\n        {\r\n            \"name\": \"Goproxilin\",\r\n            \"weight\": 85,\r\n            \"code\": \"GOPROXILIN_335\",\r\n            \"imageUrl\": \"https://camerashop.com.eg/wp-content/uploads/2021/10/1631822665_IMG_1606161.jpg\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/drones/available",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drones",
+						"available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Battery Level",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drones/3863794932/battery",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drones",
+						"3863794932",
+						"battery"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
