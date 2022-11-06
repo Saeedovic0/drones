@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+
+  postgres-db:
+    image: postgres
+    container_name: postgres-db
+    restart: always
+    user: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: drones
+    hostname: postgres.docker
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - drones-network
+
+  drones-service:
+    image: drones
+    container_name: drones-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://postgres.docker:5432/drones
+    ports:
+      - 8080:8080
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    networks:
+      - drones-network
+
+networks:
+  drones-network:
+    driver: bridge
