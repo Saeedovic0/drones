@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface DroneEntityRepo extends JpaRepository<DroneEntity, String> {
+public interface DroneEntityRepo extends JpaRepository<DroneEntity, String> {
     Page<DroneEntity> findByStateAndWeightLimitGreaterThanEqualAndBatteryCapacityGreaterThanEqual
             (Drone.State state, float weightLimit, float batteryCapacity, Pageable pageable);
 }

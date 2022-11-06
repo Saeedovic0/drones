@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class MedicationRepoImpl implements MedicationRepo {
+class MedicationRepoImpl implements MedicationRepo {
     @Autowired
     MedicationEntityRepo medicationEntityRepo;
 

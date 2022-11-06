@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class DroneRepoImpl implements DroneRepo {
+class DroneRepoImpl implements DroneRepo {
     @Autowired
     private DroneEntityRepo droneEntityRepo;
 
